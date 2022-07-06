@@ -108,6 +108,21 @@
         /// <summary>
         /// The field is not null or empty
         /// </summary>
-        IsNotNullOrEmpty
+        IsNotNullOrEmpty,
+
+        /// <summary>
+        /// The field is start with value with case insensitive
+        /// </summary>
+        StartWithCaseInsensitive,
+
+        /// <summary>
+        /// The field is contains the value with case insensitive.
+        /// </summary>
+        ContainsCaseInsensitive,
+
+        /// <summary>
+        /// The field is end with value with case insensitive.
+        /// </summary>
+        EndsWithCaseInsensitive,
     }
 }

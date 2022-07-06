@@ -261,6 +261,12 @@ namespace QueryDesignerCore.Expressions
                 case WhereFilterType.StartsWith:
                     return Expression.Call(prop, StartsMethod, Expression.Constant(filter.Value, StringType));
 
+                case WhereFilterType.StartWithCaseInsensitive:
+                    var StartWithCaseInsensitiveToLower = Expression.Call(prop,
+                               typeof(string)
+                               .GetMethod("ToLower", System.Type.EmptyTypes));
+                    return Expression.Call(StartWithCaseInsensitiveToLower, StartsMethod, Expression.Constant(filter.Value.ToString().ToLower(), StringType));
+
                 case WhereFilterType.NotStartsWith:
                     return Expression.Not(
                         Expression.Call(prop, StartsMethod, Expression.Constant(filter.Value, StringType)));
@@ -268,12 +274,24 @@ namespace QueryDesignerCore.Expressions
                 case WhereFilterType.Contains:
                     return Expression.Call(prop, ContainsMethod, Expression.Constant(filter.Value, StringType));
 
+                case WhereFilterType.ContainsCaseInsensitive:
+                    var ContainsCaseInsensitiveToLower = Expression.Call(prop,
+                               typeof(string)
+                               .GetMethod("ToLower", System.Type.EmptyTypes));
+                    return Expression.Call(ContainsCaseInsensitiveToLower, ContainsMethod, Expression.Constant(filter.Value.ToString().ToLower(), StringType));
+
                 case WhereFilterType.NotContains:
                     return Expression.Not(
                         Expression.Call(prop, ContainsMethod, Expression.Constant(filter.Value, StringType)));
 
                 case WhereFilterType.EndsWith:
                     return Expression.Call(prop, EndsMethod, Expression.Constant(filter.Value, StringType));
+
+                case WhereFilterType.EndsWithCaseInsensitive:
+                    var EndsWithCaseInsensitiveToLower = Expression.Call(prop,
+                              typeof(string)
+                              .GetMethod("ToLower", System.Type.EmptyTypes));
+                    return Expression.Call(EndsWithCaseInsensitiveToLower, EndsMethod, Expression.Constant(filter.Value.ToString().ToLower(), StringType));
 
                 case WhereFilterType.NotEndsWith:
                     return Expression.Not(
